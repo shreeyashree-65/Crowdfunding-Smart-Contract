@@ -15,6 +15,16 @@ contract CrowdFund {
         mapping(address => uint) contributions;
     }
     
+    struct CampaignView {
+    address creator;
+    string title;
+    string description;
+    uint goal;
+    uint deadline;
+    uint amountRaised;
+    bool withdrawn;
+    }
+
     mapping(uint => Campaign) public campaigns;
 
     event CampaignCreated(uint campaignId, address creator);
@@ -82,4 +92,22 @@ contract CrowdFund {
     function getContribution(uint _id, address _user) external view returns (uint) {
         return campaigns[_id].contributions[_user];
     }
+    
+    function getAllCampaigns() public view returns (CampaignView[] memory) {
+    CampaignView[] memory result = new CampaignView[](campaignCount);
+    for (uint i = 1; i <= campaignCount; i++) {
+        Campaign storage c = campaigns[i];
+        result[i - 1] = CampaignView(
+            c.creator,
+            c.title,
+            c.description,
+            c.goal,
+            c.deadline,
+            c.amountRaised,
+            c.withdrawn
+        );
+    }
+    return result;
+}
+
 }
