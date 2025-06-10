@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import crowdfundingArtifact from './contracts/Crowdfunding.json';
 
-const CONTRACT_ADDRESS = 'REPLACE_WITH_YOUR_DEPLOYED_ADDRESS'; // e.g. 0xabc...
+const CONTRACT_ADDRESS = '0x93c1bCC51DC27CEd786c14B84Fe352255E7130f9';
 
 function App() {
   const [account, setAccount] = useState(null);
@@ -30,11 +30,11 @@ function App() {
     const fetchCampaigns = async () => {
       if (contract) {
         try {
-          const data = await contract.getCampaigns(); // replace with your getter method
+          const data = await contract.getCampaigns(); 
           setCampaigns(data);
-          console.log("📦 Campaigns:", data);
+          console.log("Campaigns:", data);
         } catch (err) {
-          console.error("❌ Failed to fetch campaigns:", err);
+          console.error("Failed to fetch campaigns:", err);
         }
       }
     };
